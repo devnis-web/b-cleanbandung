@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Clean Bandung | Jasa Cleaning Service Bandung</title>
+    <meta name="description" content="B.Clean Bandung melayani berbagai kebutuhan cleaning service seperti Daily Cleaning, Deep Cleaning, Cuci Sofa/Kasur, dan Jasa Angkut di Kota & Kabupaten Bandung.">
+    
+    <!-- Open Graph / Meta Sosial -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="B.Clean Bandung | Jasa Cleaning Service Bandung">
+    <meta property="og:description" content="Jasa cleaning service terpercaya di Kota Bandung & Kabupaten Bandung sejak November 2019.">
+    <meta property="og:url" content="https://wa.me/628977990105">
+
+    <!-- Favicon Placeholder -->
+    <!-- <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧹</text></svg>"> -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#16A34A',
+                        secondary: '#15803D',
+                        accent: '#DCFCE7'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Helper Styles for Lightbox & Animations -->
+    <style>
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-700 bg-white antialiased selection:bg-accent selection:text-secondary">
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand / Logo -->
+                <a href="#beranda" class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-primary rounded-lg p-1">
+                    <div class="w-10 h-10 rounded-xl bg-accent text-primary flex items-center justify-center font-bold text-xl group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-broom"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-extrabold text-xl text-slate-900 tracking-tight leading-none">B.Clean</span>
+                        <span class="text-xs font-semibold text-primary tracking-widest uppercase">Bandung</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#beranda" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Beranda</a>
+                    <a href="#tentang" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Tentang</a>
+                    <a href="#layanan" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Layanan</a>
+                    <a href="#dokumentasi" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Dokumentasi</a>
+                    <a href="#testimoni" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Testimoni</a>
+                    <a href="#kontak" class="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Kontak</a>
+                </nav>
+
+                <!-- Desktop CTA -->
+                <div class="hidden md:block">
+                    <button onclick="contactWhatsApp()" class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-sm hover:shadow-md transition-all active:scale-95">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        Hubungi Kami
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-btn" type="button" aria-label="Buka Menu" aria-expanded="false" class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <a href="#beranda" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-accent hover:text-secondary">Beranda</a>
+            <a href="#tentang" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-accent hover:text-secondary">Tentang</a>
+            <a href="#layanan" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-accent hover:text-secondary">Layanan</a>
+            <a href="#dokumentasi" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-accent hover:text-secondary">Dokumentasi</a>
+            <a href="#testimoni" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-accent hover:text-secondary">Testimoni</a>
+            <a href="#kontak" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-accent hover:text-secondary">Kontak</a>
+            <div class="pt-2">
+                <button onclick="contactWhatsApp()" class="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-secondary text-white font-semibold text-base py-3 rounded-xl shadow-sm">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    Hubungi Kami
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="beranda">
+        <!-- HERO SECTION -->
+        <section class="relative pt-8 pb-16 lg:pt-16 lg:pb-24 overflow-hidden bg-gradient-to-b from-accent/30 to-transparent">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left reveal-element">
+                        <div>
+                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-accent text-secondary border border-green-200">
+                                <i class="fa-solid fa-award"></i> Berpengalaman Sejak November 2019
+                            </span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                            Jasa Cleaning Service di <span class="text-primary">Bandung</span>
+                        </h1>
+                        <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            B.Clean Bandung melayani berbagai kebutuhan cleaning untuk rumah, tempat usaha, dan kebutuhan lainnya di Kota Bandung dan Kabupaten Bandung.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <button onclick="contactWhatsApp()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-primary hover:bg-secondary text-white font-bold text-base px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                                <i class="fa-brands fa-whatsapp text-xl"></i>
+                                Konsultasi via WhatsApp
+                            </button>
+                            <a href="#layanan" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-base px-8 py-4 rounded-xl border border-slate-200 shadow-sm transition-all">
+                                Lihat Layanan
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 reveal-element">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-100 border-4 border-white">
+                                <!-- Ganti dengan foto asli B.Clean Bandung -->
+                                <img src="assets/images/hero.webp" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80';" alt="B.Clean Bandung Cleaning Service" class="w-full h-[380px] sm:h-[450px] object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST / EXPERIENCE SECTION -->
+        <section class="py-10 bg-white border-y border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+                    
+                    <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-50/80 border border-slate-100">
+                        <div class="p-3 bg-accent text-primary rounded-xl shrink-0">
+                            <i class="fa-solid fa-calendar-check text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-slate-900 text-sm">Sejak 2019</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">B.Clean Bandung berjalan sejak Nov 2019.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-50/80 border border-slate-100">
+                        <div class="p-3 bg-accent text-primary rounded-xl shrink-0">
+                            <i class="fa-solid fa-user-shield text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-slate-900 text-sm">Helper Terpercaya</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Didukung tim terlatih & amanah.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-50/80 border border-slate-100">
+                        <div class="p-3 bg-accent text-primary rounded-xl shrink-0">
+                            <i class="fa-solid fa-broom-ball text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-slate-900 text-sm">Beragam Layanan</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Solusi lengkap kebersihan ruangan.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-50/80 border border-slate-100">
+                        <div class="p-3 bg-accent text-primary rounded-xl shrink-0">
+                            <i class="fa-solid fa-location-dot text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-bold text-slate-900 text-sm">Area Bandung</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Kota & Kabupaten Bandung.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TENTANG KAMI -->
+        <section id="tentang" class="py-16 lg:py-24 bg-slate-50/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-5 reveal-element">
+                        <div class="rounded-3xl overflow-hidden shadow-lg border-4 border-white bg-slate-200">
+                            <!-- Ganti dengan foto asli B.Clean Bandung -->
+                            <img src="assets/images/about.webp" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&w=800&q=80';" alt="Tim B.Clean Bandung" class="w-full h-[320px] sm:h-[400px] object-cover" loading="lazy">
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 space-y-6 reveal-element">
+                        <div class="inline-flex items-center gap-2 text-primary font-bold text-sm tracking-wider uppercase">
+                            <i class="fa-solid fa-circle-info"></i> Profil Usaha
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                            Tentang B.Clean Bandung
+                        </h2>
+                        <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+                            B.Clean Bandung sudah berjalan sejak November 2019. Berawal dari pengalaman di X-Go Clean, kami terus melayani berbagai kebutuhan cleaning di Bandung dengan dibantu helper-helper terpercaya.
+                        </p>
+                        <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                            <p class="text-slate-800 font-medium italic">
+                                "Kami mengutamakan pengalaman, pelayanan, dan kepercayaan pelanggan dalam setiap pekerjaan."
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYANAN -->
+        <section id="layanan" class="py-16 lg:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                    <span class="text-primary font-bold text-sm tracking-wider uppercase">Layanan Kami</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+                        Solusi Kebersihan Lengkap & Profesional
+                    </h2>
+                    <p class="text-slate-600 mt-4 text-base sm:text-lg">
+                        Pilih layanan cleaning yang sesuai dengan kebutuhan rumah, apartemen, atau tempat usaha Anda.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Card 1 -->
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-accent text-primary flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-house-chimney-crack"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Daily Cleaning</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">Membantu menjaga kebersihan ruangan untuk kebutuhan sehari-hari.</p>
+                        </div>
+                        <button onclick="contactWhatsApp('Daily Cleaning')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
+                            Tanya Harga <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-accent text-primary flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-broom"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Deep Cleaning</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">Pembersihan menyeluruh untuk area yang membutuhkan perhatian lebih.</p>
+                        </div>
+                        <button onclick="contactWhatsApp('Deep Cleaning')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
+                            Tanya Harga <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-accent text-primary flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-shower"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Deep Toilet</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">Pembersihan toilet secara lebih detail dan menyeluruh.</p>
+                        </div>
+                        <button onclick="contactWhatsApp('Deep Toilet')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
+                            Tanya Harga <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-accent text-primary flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-shirt"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Lipat / Setrika</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">Membantu kebutuhan melipat dan menyetrika pakaian.</p>
+                        </div>
+                        <button onclick="contactWhatsApp('Lipat / Setrika')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
+                            Tanya Harga <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-accent text-primary flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-box-open"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Packing & Unpacking</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">Membantu proses packing maupun unpacking barang.</p>
+                        </div>
+                        <button onclick="contactWhatsApp('Packing & Unpacking')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
+                            Tanya Harga <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-accent text-primary flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-pump-soap"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Salon Toilet</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">Membantu membersihkan dan merawat area toilet agar lebih nyaman.</p>
+                        </div>
+                        <button onclick="contactWhatsApp('Salon Toilet')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
+                            Tanya Harga <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-accent text-primary flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-couch"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Cuci Kasur & Sofa</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">Membersihkan kasur dan sofa dari kotoran dan debu.</p>
+                        </div>
+                        <button onclick="contactWhatsApp('Cuci Kasur & Sofa')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
+                            Tanya Harga <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-accent text-primary flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-truck-ramp-box"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Jasa Angkut</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">Membantu kebutuhan pengangkutan barang.</p>
+                        </div>
+                        <button onclick="contactWhatsApp('Jasa Angkut')" class="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
+                            Tanya Harga <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE US -->
+        <section class="py-16 lg:py-24 bg-slate-50/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                    <span class="text-primary font-bold text-sm tracking-wider uppercase">Keunggulan</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+                        Kenapa B.Clean Bandung?
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-accent text-primary flex items-center justify-center shrink-0 font-bold">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-1">Berpengalaman Sejak Nov 2019</h3>
+                            <p class="text-slate-600 text-sm">Jam terbang operasional yang konsisten dalam menangani berbagai kondisi kebersihan.</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-accent text-primary flex items-center justify-center shrink-0 font-bold">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-1">Pengalaman dari X-Go Clean</h3>
+                            <p class="text-slate-600 text-sm">Berawal dari fondasi dan pemahaman standar pengerjaan cleaning service profesional.</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-accent text-primary flex items-center justify-center shrink-0 font-bold">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-1">Helper-helper Terpercaya</h3>
+                            <p class="text-slate-600 text-sm">Didukung oleh tim lapang yang jujur, teliti, dan mengutamakan kerapihan.</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-accent text-primary flex items-center justify-center shrink-0 font-bold">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-1">Dokumentasi Transparan</h3>
+                            <p class="text-slate-600 text-sm">Memiliki rekaman Before-After lengkap dari hasil kerja nyata tim di lapangan.</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-accent text-primary flex items-center justify-center shrink-0 font-bold">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-1">Testimoni Pelanggan</h3>
+                            <p class="text-slate-600 text-sm">Ulasan dan kepuasan riil dari para pelanggan yang telah mempercayakan jasanya.</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal-element bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-accent text-primary flex items-center justify-center shrink-0 font-bold">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-1">Jangkauan Area Luas</h3>
+                            <p class="text-slate-600 text-sm">Siap melayani seluruh wilayah Kota Bandung dan Kabupaten Bandung.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- BEFORE & AFTER (DOKUMENTASI) -->
+        <section id="dokumentasi" class="py-16 lg:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                    <span class="text-primary font-bold text-sm tracking-wider uppercase">Galeri Pekerjaan</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+                        Hasil Pekerjaan Kami (Before & After)
+                    </h2>
+                    <p class="text-slate-600 mt-3 text-base">Klik pada gambar untuk melihat tampilan lebih besar.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Pair 1 -->
+                    <div class="reveal-element bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3 text-center">Dokumentasi 1</span>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-before-1.jpeg', 'Before - Dokumentasi 1')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-before-1.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-before-1.jpeg';" alt="Before 1" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded">BEFORE</span>
+                            </div>
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-after-1.jpeg', 'After - Dokumentasi 1')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-after-1.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-after-1.jpeg';" alt="After 1" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded">AFTER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pair 2 -->
+                    <div class="reveal-element bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3 text-center">Dokumentasi 2</span>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-before-2.jpeg', 'Before - Dokumentasi 2')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-before-2.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-before-2.jpeg';" alt="Before 2" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded">BEFORE</span>
+                            </div>
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-after-2.jpeg', 'After - Dokumentasi 2')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-after-2.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-after-2.jpeg';" alt="After 2" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded">AFTER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pair 3 -->
+                    <div class="reveal-element bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3 text-center">Dokumentasi 3</span>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-before-3.jpeg', 'Before - Dokumentasi 3')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-before-3.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-before-3.jpeg';" alt="Before 3" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded">BEFORE</span>
+                            </div>
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-after-3.jpeg', 'After - Dokumentasi 3')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-after-3.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-after-3.jpeg';" alt="After 3" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded">AFTER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- pair 4 -->
+                    <div class="reveal-element bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3 text-center">Dokumentasi 4</span>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-before-4.jpeg', 'Before - Dokumentasi 4')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-before-4.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-before-4.jpeg';" alt="Before 4" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded">BEFORE</span>
+                            </div>
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-after-4.jpeg', 'After - Dokumentasi 4')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-after-4.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-after-4.jpeg';" alt="After 4" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded">AFTER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- pair 5 -->
+                    <div class="reveal-element bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3 text-center">Dokumentasi 5</span>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-before-5.jpeg', 'Before - Dokumentasi 5')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-before-5.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-before-5.jpeg';" alt="Before 5" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded">BEFORE</span>
+                            </div>
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-after-5.jpeg', 'After - Dokumentasi 5')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-after-5.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-after-5.jpeg';" alt="After 5" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded">AFTER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- pair 6 -->
+                    <div class="reveal-element bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3 text-center">Dokumentasi 6</span>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-before-6.jpeg', 'Before - Dokumentasi 6')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-before-6.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-before-6.jpeg';" alt="Before 6" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded">BEFORE</span>
+                            </div>
+                            <div class="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-200" onclick="openLightbox('assets/images/dok-after-6.jpeg', 'After - Dokumentasi 6')">
+                                <!-- Ganti dengan dokumentasi before-after asli -->
+                                <img src="assets/images/dok-after-6.jpeg" onerror="this.onerror=null; this.src='assets/images/dok-after-6.jpeg';" alt="After 6" class="w-full h-36 object-cover group-hover:scale-105 transition-transform" loading="lazy">
+                                <span class="absolute bottom-2 left-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded">AFTER</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TIKTOK SECTION -->
+        <section class="py-12 bg-slate-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8 reveal-element">
+                    <div class="space-y-3 text-center md:text-left max-w-2xl">
+                        <div class="inline-flex items-center gap-2 text-primary font-semibold text-xs tracking-wider uppercase">
+                            <i class="fa-brands fa-tiktok text-sm"></i> Dokumentasi Video & Story
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                            Lihat Dokumentasi & Testimoni Kami
+                        </h2>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Ingin melihat hasil pekerjaan dan pengalaman pelanggan kami? Lihat dokumentasi before-after dan testimoni B.Clean Bandung di TikTok.
+                        </p>
+                    </div>
+                    <div>
+                        <!-- Placeholder TIKTOK_URL -->
+                        <a href="https://www.tiktok.com/@b_cleanbandung?_r=1&_t=ZS-99rcqz7ZytQ" target="_blank" rel="noopener noreferrer" onclick="if(this.getAttribute('href')==='TIKTOK_URL'){ alert('Link TikTok akan ditautkan setelah URL akun resmi diberikan.'); return false; }" class="inline-flex items-center gap-3 bg-white text-slate-900 hover:bg-slate-100 font-bold px-6 py-3.5 rounded-xl shadow-md transition-all text-sm shrink-0">
+                            <i class="fa-brands fa-tiktok text-lg text-slate-900"></i>
+                            Kunjungi TikTok
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONI -->
+        <section id="testimoni" class="py-16 lg:py-24 bg-slate-50/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                    <span class="text-primary font-bold text-sm tracking-wider uppercase">Ulasan Klien</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
+                        Apa Kata Pelanggan Kami?
+                    </h2>
+                </div>
+
+                <div id="testimonial-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Dynamic rendering via main.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- AREA LAYANAN -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-br from-accent/50 via-slate-50 to-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        
+                        <div class="lg:col-span-7 space-y-4 reveal-element">
+                            <span class="text-primary font-bold text-sm tracking-wider uppercase">Cakupan Wilayah</span>
+                            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                                Area Layanan Kami
+                            </h2>
+                            <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+                                Melayani kebutuhan cleaning di wilayah <strong>Kota Bandung</strong> dan <strong>Kabupaten Bandung</strong>.
+                            </p>
+                            <div class="pt-2 flex items-center gap-3 text-slate-700 font-medium">
+                                <div class="p-2 bg-white rounded-lg text-primary shadow-sm border border-slate-100">
+                                    <i class="fa-solid fa-van-shuttle"></i>
+                                </div>
+                                <span>Transportasi menyesuaikan lokasi pelanggan.</span>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 reveal-element">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm">
+                                    <i class="fa-solid fa-city text-primary text-3xl mb-2"></i>
+                                    <h3 class="font-bold text-slate-900 text-base">Kota Bandung</h3>
+                                </div>
+                                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm">
+                                    <i class="fa-solid fa-tree-city text-primary text-3xl mb-2"></i>
+                                    <h3 class="font-bold text-slate-900 text-base">Kab. Bandung</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA WHATSAPP BANNER -->
+        <section class="py-16 bg-primary text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 reveal-element">
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                    Butuh Bantuan Cleaning?
+                </h2>
+                <p class="text-green-100 text-base sm:text-lg max-w-2xl mx-auto">
+                    Konsultasikan kebutuhan cleaning Anda bersama B.Clean Bandung.
+                </p>
+                <div>
+                    <button onclick="contactWhatsApp()" class="inline-flex items-center gap-3 bg-white text-primary hover:bg-green-50 font-extrabold text-base px-8 py-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        Chat WhatsApp Sekarang
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- KONTAK DETAIL -->
+        <section id="kontak" class="py-16 lg:py-24 bg-slate-50/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-12 reveal-element">
+                    <span class="text-primary font-bold text-sm tracking-wider uppercase">Informasi Kontak</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+                        Hubungi B.Clean Bandung
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center reveal-element">
+                        <div class="w-12 h-12 bg-accent text-primary rounded-xl flex items-center justify-center text-xl mx-auto mb-4">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-base mb-1">WhatsApp</h3>
+                        <p class="text-slate-600 text-sm font-medium">08977990105</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center reveal-element">
+                        <div class="w-12 h-12 bg-accent text-primary rounded-xl flex items-center justify-center text-xl mx-auto mb-4">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-base mb-1">Jam Operasional</h3>
+                        <p class="text-slate-600 text-sm">Senin – Minggu<br>09.00 – 18.30 WIB</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center reveal-element">
+                        <div class="w-12 h-12 bg-accent text-primary rounded-xl flex items-center justify-center text-xl mx-auto mb-4">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-base mb-1">Area Layanan</h3>
+                        <p class="text-slate-600 text-sm">Kota Bandung &<br>Kabupaten Bandung</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center reveal-element">
+                        <div class="w-12 h-12 bg-accent text-primary rounded-xl flex items-center justify-center text-xl mx-auto mb-4">
+                            <i class="fa-solid fa-truck"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-base mb-1">Transportasi</h3>
+                        <p class="text-slate-600 text-sm">Menyesuaikan Lokasi Pelanggan</p>
+                    </div>
+
+                </div>
+
+                <div class="mt-12 text-center">
+                    <button onclick="contactWhatsApp()" class="inline-flex items-center gap-2.5 bg-primary hover:bg-secondary text-white font-bold text-base px-8 py-3.5 rounded-xl shadow-md transition-all">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        Hubungi via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-800">
+                
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-broom"></i>
+                        </div>
+                        <span class="font-extrabold text-xl text-white tracking-tight">B.Clean Bandung</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
+                        Jasa cleaning service untuk berbagai kebutuhan rumah, kos, kantor, dan tempat usaha di Bandung.
+                    </p>
+                </div>
+
+                <div class="md:col-span-3 space-y-3">
+                    <h3 class="text-white font-semibold text-sm">Navigasi</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#beranda" class="hover:text-primary transition-colors">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-primary transition-colors">Tentang</a></li>
+                        <li><a href="#layanan" class="hover:text-primary transition-colors">Layanan</a></li>
+                        <li><a href="#dokumentasi" class="hover:text-primary transition-colors">Dokumentasi</a></li>
+                        <li><a href="#testimoni" class="hover:text-primary transition-colors">Testimoni</a></li>
+                        <li><a href="#kontak" class="hover:text-primary transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-4 space-y-3">
+                    <h3 class="text-white font-semibold text-sm">Kontak Singkat</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-brands fa-whatsapp text-primary"></i> 08977990105</li>
+                        <li class="flex items-center gap-2"><i class="fa-regular fa-clock text-primary"></i> 09.00 – 18.30 WIB</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-primary"></i> Kota & Kab. Bandung</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 text-center text-xs text-slate-500">
+                <p>&copy; 2026 B.Clean Bandung. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <div class="fixed bottom-6 right-6 z-50 group">
+        <!-- Tooltip Desktop -->
+        <span class="hidden md:block absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-1.5 bg-slate-900 text-white text-xs font-medium rounded-lg shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            Konsultasi Cleaning
+        </span>
+        <button onclick="contactWhatsApp()" aria-label="Chat WhatsApp B.Clean Bandung" class="flex items-center justify-center w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-300">
+            <i class="fa-brands fa-whatsapp text-3xl"></i>
+        </button>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-sm flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" aria-label="Tutup Galeri" class="absolute top-5 right-5 text-white/80 hover:text-white text-3xl p-2 focus:outline-none">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl max-h-[90vh] flex flex-col items-center">
+            <img id="lightbox-img" src="" alt="Detail Dokumentasi" class="max-w-full max-h-[80vh] object-contain rounded-lg">
+            <p id="lightbox-caption" class="text-white text-sm mt-3 font-medium text-center"></p>
+        </div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT -->
+    <script src="js/main.js"></script>
+</body>
+</html>
