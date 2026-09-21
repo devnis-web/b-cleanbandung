@@ -231,7 +231,7 @@ const PRICE_LIST = {
     'Jasa Cari / Survai Kost': 25000,
 
     // Salon Toilet
-    'Salon Toilet (Uk. 1m x 2m)': 300000,
+    'Salon Toilet (Uk. 1m x 2m)': 350000,
     'Salon Toilet (Uk. 2m x 2m)': 450000,
     'Salon Toilet (Uk. 3m x 2m)': 550000,
 
@@ -265,6 +265,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     addServiceRow();
 });
+
+/**
+ * Toggle Tampilan Input Detail Hewan Peliharaan
+ */
+function toggleHewanInput(show) {
+    const container = document.getElementById('hewanDetailContainer');
+    if (container) {
+        if (show) {
+            container.classList.remove('hidden');
+        } else {
+            container.classList.add('hidden');
+            document.getElementById('jenisHewan').value = '';
+        }
+    }
+}
 
 /**
  * Menambahkan Baris Layanan Baru ke Form
@@ -337,7 +352,7 @@ function calculateOrder() {
     let subtotal = 0;
     let selectedItems = [];
 
-    const transportFee = areaTransportSelect ? parseInt(areaTransportSelect.value) || 0 : 10000;
+    const transportFee = areaTransportSelect ? parseInt(areaTransportSelect.value) || 0 : 15000;
 
     rows.forEach((row) => {
         const select = row.querySelector('.service-select');
@@ -350,8 +365,6 @@ function calculateOrder() {
 
         if (serviceName && PRICE_LIST[serviceName]) {
             let basePrice = PRICE_LIST[serviceName];
-            
-            // Kalkulasi: Harga x Qty x Jumlah Mitra
             const itemTotal = basePrice * qty * mitra;
             subtotal += itemTotal;
 
@@ -364,7 +377,6 @@ function calculateOrder() {
         }
     });
 
-    // Render item ke Struk
     if (selectedItems.length === 0) {
         receiptContainer.innerHTML = `<p class="text-slate-400 italic text-center py-2">Pilih layanan dulu untuk melihat estimasi.</p>`;
     } else {
@@ -397,6 +409,14 @@ function sendToWhatsApp() {
     const areaSelect = document.getElementById('areaTransport');
     const areaText = areaSelect.options[areaSelect.selectedIndex].text;
     const transportFee = parseInt(areaSelect.value) || 0;
+
+    // Ambil info hewan peliharaan
+    const hewanRadio = document.querySelector('input[name="hewan"]:checked').value;
+    const jenisHewanInput = document.getElementById('jenisHewan').value.trim();
+    let hewanInfo = hewanRadio;
+    if (hewanRadio === 'Ada' && jenisHewanInput !== '') {
+        hewanInfo = `Ada (${jenisHewanInput})`;
+    }
 
     const rows = document.querySelectorAll('#servicesContainer > div');
     let servicesText = '';
@@ -434,6 +454,7 @@ function sendToWhatsApp() {
 • Alamat: ${alamat}
 • Area Ongkir: ${areaText}
 • Jadwal: ${tanggal} (Jam ${jam} WIB)
+• Hewan Peliharaan: ${hewanInfo}
 
 *Layanan yang Dipilih:*
 ${servicesText}

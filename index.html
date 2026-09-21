@@ -782,6 +782,27 @@
                                 </div>
                             </div>
 
+                            <!-- INFORMASI HEWAN PELIHARAAN (BARU) -->
+                            <div class="bg-[#164e80]/80 p-4 rounded-xl border border-slate-600/60 space-y-3">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                                    <i class="fa-solid fa-paw text-amber-400 mr-1"></i> Memiliki Hewan Peliharaan di Lokasi?
+                                </label>
+                                <div class="flex items-center gap-6">
+                                    <label class="inline-flex items-center gap-2 text-sm text-slate-200 cursor-pointer">
+                                        <input type="radio" name="hewan" value="Tidak ada" checked onchange="toggleHewanInput(false)" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
+                                        Tidak ada
+                                    </label>
+                                    <label class="inline-flex items-center gap-2 text-sm text-slate-200 cursor-pointer">
+                                        <input type="radio" name="hewan" value="Ada" onchange="toggleHewanInput(true)" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
+                                        Ada (Kucing, Anjing, dll)
+                                    </label>
+                                </div>
+                                <div id="hewanDetailContainer" class="hidden pt-1">
+                                    <input type="text" id="jenisHewan" placeholder="Sebutkan jenis hewan (contoh: Kucing Anggora 2 ekor)" 
+                                        class="w-full bg-white text-slate-900 placeholder-slate-400 px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
+                                </div>
+                            </div>
+
                             <!-- Dynamic Container Layanan -->
                             <div class="space-y-4 pt-2">
                                 <div class="flex items-center justify-between">
