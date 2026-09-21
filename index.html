@@ -238,6 +238,180 @@
             </div>
         </section>
 
+        <!-- SECTION PEMESANAN LAYANAN -->
+        <section class="py-12 bg-[#0d3b66] min-h-screen text-slate-100 font-sans">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Header Section -->
+                <div class="mb-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Layanan Cepat, Bersih, Teliti, Rapi, Wangi</span>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">Pemesanan Layanan</h1>
+                    <p class="text-slate-300 text-sm mt-1">Pilih layanan, durasi, jumlah mitra, dan area lokasi untuk melihat estimasi harga B_cleanbandung.</p>
+                </div>
+
+                <!-- Main Layout Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- LEFT COLUMN: Form Pemesanan -->
+                    <div class="lg:col-span-7 bg-[#134373]/90 backdrop-blur border border-slate-700/60 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+                        <form id="orderForm" onsubmit="event.preventDefault(); sendToWhatsApp();" class="space-y-5">
+                            
+                            <!-- Nama Lengkap -->
+                            <div>
+                                <label for="nama" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Nama Lengkap</label>
+                                <input type="text" id="nama" required placeholder="Nama pelanggan" 
+                                    class="w-full bg-white text-slate-900 placeholder-slate-400 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
+                            </div>
+
+                            <!-- Alamat Lengkap & Area Ongkir -->
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+                                <div class="sm:col-span-6">
+                                    <label for="alamat" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Alamat Lengkap</label>
+                                    <input type="text" id="alamat" required placeholder="Jl. Raya No. XX, Bandung" 
+                                        class="w-full bg-white text-slate-900 placeholder-slate-400 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
+                                </div>
+                                <div class="sm:col-span-6">
+                                    <label for="areaTransport" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Ongkir Bandung & Kab. Bandung</label>
+                                    <select id="areaTransport" onchange="calculateOrder()" class="w-full bg-white text-slate-900 px-3 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
+                                        <optgroup label="Kota Bandung (10-25k)">
+                                            <option value="10000">Bandung Dekat (Rp 10.000)</option>
+                                            <option value="15000" selected>Bandung Sedang (Rp 15.000)</option>
+                                            <option value="25000">Bandung Jauh (Rp 25.000)</option>
+                                        </optgroup>
+                                        <optgroup label="Kabupaten Bandung (20-100k)">
+                                            <option value="20000">Kab. Bandung Dekat (Rp 20.000)</option>
+                                            <option value="50000">Kab. Bandung Sedang (Rp 50.000)</option>
+                                            <option value="100000">Kab. Bandung Jauh (Rp 100.000)</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Tanggal & Jam -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="tanggal" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Tanggal</label>
+                                    <input type="date" id="tanggal" required 
+                                        class="w-full bg-white text-slate-900 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
+                                </div>
+                                <div>
+                                    <label for="jam" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Jam Kedatangan</label>
+                                    <input type="time" id="jam" required 
+                                        class="w-full bg-white text-slate-900 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
+                                </div>
+                            </div>
+
+                            <!-- INFORMASI HEWAN PELIHARAAN -->
+                            <div class="bg-[#164e80]/80 p-4 rounded-xl border border-slate-600/60 space-y-3">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                                    <i class="fa-solid fa-paw text-amber-400 mr-1"></i> Memiliki Hewan Peliharaan di Lokasi?
+                                </label>
+                                <div class="flex items-center gap-6">
+                                    <label class="inline-flex items-center gap-2 text-sm text-slate-200 cursor-pointer">
+                                        <input type="radio" name="hewan" value="Tidak ada" checked onchange="toggleHewanInput(false)" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
+                                        Tidak ada
+                                    </label>
+                                    <label class="inline-flex items-center gap-2 text-sm text-slate-200 cursor-pointer">
+                                        <input type="radio" name="hewan" value="Ada" onchange="toggleHewanInput(true)" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
+                                        Ada (Kucing, Anjing, dll)
+                                    </label>
+                                </div>
+                                <div id="hewanDetailContainer" class="hidden pt-1">
+                                    <input type="text" id="jenisHewan" placeholder="Sebutkan jenis hewan (contoh: Kucing Anggora 2 ekor)" 
+                                        class="w-full bg-white text-slate-900 placeholder-slate-400 px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Container Layanan -->
+                            <div class="space-y-4 pt-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">Daftar Layanan</label>
+                                    <button type="button" onclick="addServiceRow()" class="text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors">
+                                        <i class="fa-solid fa-plus-circle"></i> Tambah Layanan Lain
+                                    </button>
+                                </div>
+                                
+                                <div id="servicesContainer" class="space-y-4">
+                                    <!-- Service rows di-render JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- DESKRIPSI PENGERJAAN (BARU) -->
+                            <div>
+                                <label for="deskripsiPengerjaan" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                    Deskripsi / Catatan Pengerjaan <span class="text-slate-400 font-normal lowercase">(opsional)</span>
+                                </label>
+                                <textarea id="deskripsiPengerjaan" rows="3" placeholder="Contoh: Fokus pembersihan di kamar mandi lantai 2 dan merapikan lemari pakaian, ada kerak agak membandel di lantai dapur." 
+                                    class="w-full bg-white text-slate-900 placeholder-slate-400 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium resize-none"></textarea>
+                            </div>
+
+                            <!-- CTA Button -->
+                            <div class="pt-2">
+                                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-[0.99] text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-3 text-base transition-all">
+                                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                                    Kirim Pesanan ke WhatsApp
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- RIGHT COLUMN: Receipt Estimasi -->
+                    <div class="lg:col-span-5 sticky top-6">
+                        <div class="bg-white text-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8 relative border border-slate-200">
+                            
+                            <!-- Top Zigzag Border Visual -->
+                            <div class="absolute -top-3 left-0 right-0 h-3 bg-white" style="clip-path: polygon(0% 100%, 5% 0%, 10% 100%, 15% 0%, 20% 100%, 25% 0%, 30% 100%, 35% 0%, 40% 100%, 45% 0%, 50% 100%, 55% 0%, 60% 100%, 65% 0%, 70% 100%, 75% 0%, 80% 100%, 85% 0%, 90% 100%, 95% 0%, 100% 100%);"></div>
+
+                            <!-- Header Struk -->
+                            <div class="text-center pb-6 border-b border-dashed border-slate-300 space-y-1">
+                                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl font-bold">
+                                    <img src="assets/images/logo.jpeg" alt="Logo B.Clean Bandung" class="w-6 h-6 object-cover rounded-full">
+                                </div>
+                                <h2 class="font-bold text-lg text-slate-900 tracking-tight">Estimasi Pesanan</h2>
+                                <p class="text-xs font-semibold text-emerald-600 uppercase tracking-widest">B_cleanbandung</p>
+                            </div>
+
+                            <!-- Itemized List -->
+                            <div class="py-6 space-y-4 border-b border-dashed border-slate-300">
+                                <div id="receiptItems" class="space-y-3 text-sm">
+                                    <p class="text-slate-400 italic text-center py-2">Pilih layanan dulu untuk melihat estimasi.</p>
+                                </div>
+                            </div>
+
+                            <!-- Subtotal & Transport -->
+                            <div class="py-4 space-y-2 text-sm border-b border-slate-200">
+                                <div class="flex justify-between text-slate-600">
+                                    <span>Subtotal Layanan</span>
+                                    <span id="receiptSubtotal" class="font-semibold text-slate-800">Rp 0</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>Ongkir / Transport</span>
+                                    <span id="receiptTransport" class="font-semibold text-slate-800">Rp 15.000</span>
+                                </div>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="pt-4 flex justify-between items-center">
+                                <span class="font-extrabold text-slate-900 text-base">Estimasi Total</span>
+                                <span id="receiptTotal" class="font-extrabold text-xl text-rose-600">Rp 15.000</span>
+                            </div>
+
+                            <!-- Barcode Visual -->
+                            <div class="mt-8 pt-4 text-center border-t border-slate-100">
+                                <div class="font-mono text-3xl tracking-widest text-slate-700 select-none opacity-80" style="font-family: 'Libre Barcode 128', cursive, monospace;">
+                                    BCLEANBANDUNG
+                                </div>
+                                <p class="text-[10px] text-slate-400 mt-1">Selesai dikalkulasi secara terintegrasi.</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <!-- LAYANAN -->
         <section id="layanan" class="py-16 lg:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -715,180 +889,6 @@
                         <i class="fa-brands fa-whatsapp text-xl"></i>
                         Hubungi via WhatsApp
                     </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION PEMESANAN LAYANAN -->
-        <section class="py-12 bg-[#0d3b66] min-h-screen text-slate-100 font-sans">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <!-- Header Section -->
-                <div class="mb-8">
-                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Layanan Cepat, Bersih, Teliti, Rapi, Wangi</span>
-                    <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">Pemesanan Layanan</h1>
-                    <p class="text-slate-300 text-sm mt-1">Pilih layanan, durasi, jumlah mitra, dan area lokasi untuk melihat estimasi harga B_cleanbandung.</p>
-                </div>
-
-                <!-- Main Layout Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    
-                    <!-- LEFT COLUMN: Form Pemesanan -->
-                    <div class="lg:col-span-7 bg-[#134373]/90 backdrop-blur border border-slate-700/60 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
-                        <form id="orderForm" onsubmit="event.preventDefault(); sendToWhatsApp();" class="space-y-5">
-                            
-                            <!-- Nama Lengkap -->
-                            <div>
-                                <label for="nama" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Nama Lengkap</label>
-                                <input type="text" id="nama" required placeholder="Nama pelanggan" 
-                                    class="w-full bg-white text-slate-900 placeholder-slate-400 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
-                            </div>
-
-                            <!-- Alamat Lengkap & Area Ongkir -->
-                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
-                                <div class="sm:col-span-6">
-                                    <label for="alamat" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Alamat Lengkap</label>
-                                    <input type="text" id="alamat" required placeholder="Jl. Raya No. XX, Bandung" 
-                                        class="w-full bg-white text-slate-900 placeholder-slate-400 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
-                                </div>
-                                <div class="sm:col-span-6">
-                                    <label for="areaTransport" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Ongkir Bandung & Kab. Bandung</label>
-                                    <select id="areaTransport" onchange="calculateOrder()" class="w-full bg-white text-slate-900 px-3 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
-                                        <optgroup label="Kota Bandung (10-25k)">
-                                            <option value="10000">Bandung Dekat (Rp 10.000)</option>
-                                            <option value="15000" selected>Bandung Sedang (Rp 15.000)</option>
-                                            <option value="25000">Bandung Jauh (Rp 25.000)</option>
-                                        </optgroup>
-                                        <optgroup label="Kabupaten Bandung (20-100k)">
-                                            <option value="20000">Kab. Bandung Dekat (Rp 20.000)</option>
-                                            <option value="50000">Kab. Bandung Sedang (Rp 50.000)</option>
-                                            <option value="100000">Kab. Bandung Jauh (Rp 100.000)</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Tanggal & Jam -->
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="tanggal" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Tanggal</label>
-                                    <input type="date" id="tanggal" required 
-                                        class="w-full bg-white text-slate-900 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
-                                </div>
-                                <div>
-                                    <label for="jam" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Jam Kedatangan</label>
-                                    <input type="time" id="jam" required 
-                                        class="w-full bg-white text-slate-900 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
-                                </div>
-                            </div>
-
-                            <!-- INFORMASI HEWAN PELIHARAAN -->
-                            <div class="bg-[#164e80]/80 p-4 rounded-xl border border-slate-600/60 space-y-3">
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">
-                                    <i class="fa-solid fa-paw text-amber-400 mr-1"></i> Memiliki Hewan Peliharaan di Lokasi?
-                                </label>
-                                <div class="flex items-center gap-6">
-                                    <label class="inline-flex items-center gap-2 text-sm text-slate-200 cursor-pointer">
-                                        <input type="radio" name="hewan" value="Tidak ada" checked onchange="toggleHewanInput(false)" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
-                                        Tidak ada
-                                    </label>
-                                    <label class="inline-flex items-center gap-2 text-sm text-slate-200 cursor-pointer">
-                                        <input type="radio" name="hewan" value="Ada" onchange="toggleHewanInput(true)" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
-                                        Ada (Kucing, Anjing, dll)
-                                    </label>
-                                </div>
-                                <div id="hewanDetailContainer" class="hidden pt-1">
-                                    <input type="text" id="jenisHewan" placeholder="Sebutkan jenis hewan (contoh: Kucing Anggora 2 ekor)" 
-                                        class="w-full bg-white text-slate-900 placeholder-slate-400 px-3 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
-                                </div>
-                            </div>
-
-                            <!-- Dynamic Container Layanan -->
-                            <div class="space-y-4 pt-2">
-                                <div class="flex items-center justify-between">
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">Daftar Layanan</label>
-                                    <button type="button" onclick="addServiceRow()" class="text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors">
-                                        <i class="fa-solid fa-plus-circle"></i> Tambah Layanan Lain
-                                    </button>
-                                </div>
-                                
-                                <div id="servicesContainer" class="space-y-4">
-                                    <!-- Service rows di-render JavaScript -->
-                                </div>
-                            </div>
-
-                            <!-- DESKRIPSI PENGERJAAN (BARU) -->
-                            <div>
-                                <label for="deskripsiPengerjaan" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                                    Deskripsi / Catatan Pengerjaan <span class="text-slate-400 font-normal lowercase">(opsional)</span>
-                                </label>
-                                <textarea id="deskripsiPengerjaan" rows="3" placeholder="Contoh: Fokus pembersihan di kamar mandi lantai 2 dan merapikan lemari pakaian, ada kerak agak membandel di lantai dapur." 
-                                    class="w-full bg-white text-slate-900 placeholder-slate-400 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium resize-none"></textarea>
-                            </div>
-
-                            <!-- CTA Button -->
-                            <div class="pt-2">
-                                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-[0.99] text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-3 text-base transition-all">
-                                    <i class="fa-brands fa-whatsapp text-2xl"></i>
-                                    Kirim Pesanan ke WhatsApp
-                                </button>
-                            </div>
-
-                        </form>
-                    </div>
-
-                    <!-- RIGHT COLUMN: Receipt Estimasi -->
-                    <div class="lg:col-span-5 sticky top-6">
-                        <div class="bg-white text-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8 relative border border-slate-200">
-                            
-                            <!-- Top Zigzag Border Visual -->
-                            <div class="absolute -top-3 left-0 right-0 h-3 bg-white" style="clip-path: polygon(0% 100%, 5% 0%, 10% 100%, 15% 0%, 20% 100%, 25% 0%, 30% 100%, 35% 0%, 40% 100%, 45% 0%, 50% 100%, 55% 0%, 60% 100%, 65% 0%, 70% 100%, 75% 0%, 80% 100%, 85% 0%, 90% 100%, 95% 0%, 100% 100%);"></div>
-
-                            <!-- Header Struk -->
-                            <div class="text-center pb-6 border-b border-dashed border-slate-300 space-y-1">
-                                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl font-bold">
-                                    <img src="assets/images/logo.jpeg" alt="Logo B.Clean Bandung" class="w-6 h-6 object-cover rounded-full">
-                                </div>
-                                <h2 class="font-bold text-lg text-slate-900 tracking-tight">Estimasi Pesanan</h2>
-                                <p class="text-xs font-semibold text-emerald-600 uppercase tracking-widest">B_cleanbandung</p>
-                            </div>
-
-                            <!-- Itemized List -->
-                            <div class="py-6 space-y-4 border-b border-dashed border-slate-300">
-                                <div id="receiptItems" class="space-y-3 text-sm">
-                                    <p class="text-slate-400 italic text-center py-2">Pilih layanan dulu untuk melihat estimasi.</p>
-                                </div>
-                            </div>
-
-                            <!-- Subtotal & Transport -->
-                            <div class="py-4 space-y-2 text-sm border-b border-slate-200">
-                                <div class="flex justify-between text-slate-600">
-                                    <span>Subtotal Layanan</span>
-                                    <span id="receiptSubtotal" class="font-semibold text-slate-800">Rp 0</span>
-                                </div>
-                                <div class="flex justify-between text-slate-600">
-                                    <span>Ongkir / Transport</span>
-                                    <span id="receiptTransport" class="font-semibold text-slate-800">Rp 15.000</span>
-                                </div>
-                            </div>
-
-                            <!-- Total -->
-                            <div class="pt-4 flex justify-between items-center">
-                                <span class="font-extrabold text-slate-900 text-base">Estimasi Total</span>
-                                <span id="receiptTotal" class="font-extrabold text-xl text-rose-600">Rp 15.000</span>
-                            </div>
-
-                            <!-- Barcode Visual -->
-                            <div class="mt-8 pt-4 text-center border-t border-slate-100">
-                                <div class="font-mono text-3xl tracking-widest text-slate-700 select-none opacity-80" style="font-family: 'Libre Barcode 128', cursive, monospace;">
-                                    BCLEANBANDUNG
-                                </div>
-                                <p class="text-[10px] text-slate-400 mt-1">Selesai dikalkulasi secara terintegrasi.</p>
-                            </div>
-
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
