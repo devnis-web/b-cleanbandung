@@ -231,7 +231,7 @@ const PRICE_LIST = {
     'Jasa Cari / Survai Kost': 25000,
 
     // Salon Toilet
-    'Salon Toilet (Uk. 1m x 2m)': 30000,
+    'Salon Toilet (Uk. 1m x 2m)': 300000,
     'Salon Toilet (Uk. 2m x 2m)': 450000,
     'Salon Toilet (Uk. 3m x 2m)': 550000,
 
