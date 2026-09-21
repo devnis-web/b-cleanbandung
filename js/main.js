@@ -418,6 +418,10 @@ function sendToWhatsApp() {
         hewanInfo = `Ada (${jenisHewanInput})`;
     }
 
+    // Ambil deskripsi pengerjaan
+    const deskripsiPengerjaan = document.getElementById('deskripsiPengerjaan').value.trim();
+    const deskripsiText = deskripsiPengerjaan !== '' ? deskripsiPengerjaan : '-';
+
     const rows = document.querySelectorAll('#servicesContainer > div');
     let servicesText = '';
     let subtotal = 0;
@@ -458,6 +462,9 @@ function sendToWhatsApp() {
 
 *Layanan yang Dipilih:*
 ${servicesText}
+*Catatan / Deskripsi Pengerjaan:*
+${deskripsiText}
+
 *Rincian Biaya:*
 • Subtotal Layanan: Rp ${subtotal.toLocaleString('id-ID')}
 • Transport/Ongkir: Rp ${transportFee.toLocaleString('id-ID')}
