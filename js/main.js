@@ -474,7 +474,8 @@ function sendToWhatsApp() {
 🕒 *Tanggal & Jam* : ${tanggalFormatted} & Jam ${jam} WIB
 🧹 *Paket Layanan* : ${paketLayananText}
      *Durasi* : ${durasiText}
-👷 *Helper (P/L)* : ${genderHelper.toLowerCase()} ${totalMitra} orang
+     *Jumlah Helper* : ${totalMitra} orang
+👷 *Helper (P/L)* : ${genderHelper.toLowerCase()}
 ⭐ *Helper Favorit (jika ada)* : ${helperFavorit || '-'}
 📝 *Deskripsi Pengerjaan* : ${deskripsiPengerjaan || '-'}
 
