@@ -404,43 +404,56 @@ function calculateOrder() {
 function sendToWhatsApp() {
     const nama = document.getElementById('nama').value.trim();
     const alamat = document.getElementById('alamat').value.trim();
-    const tanggal = document.getElementById('tanggal').value;
+    const tanggalInput = document.getElementById('tanggal').value;
     const jam = document.getElementById('jam').value;
-    const areaSelect = document.getElementById('areaTransport');
-    const areaText = areaSelect.options[areaSelect.selectedIndex].text;
-    const transportFee = parseInt(areaSelect.value) || 0;
+    
+    // Ambil Data Helper
+    const genderHelper = document.getElementById('genderHelper') ? document.getElementById('genderHelper').value : 'Perempuan';
+    const helperFavorit = document.getElementById('helperFavorit') ? document.getElementById('helperFavorit').value.trim() : '';
 
-    // Ambil info hewan peliharaan
-    const hewanRadio = document.querySelector('input[name="hewan"]:checked').value;
-    const jenisHewanInput = document.getElementById('jenisHewan').value.trim();
-    let hewanInfo = hewanRadio;
-    if (hewanRadio === 'Ada' && jenisHewanInput !== '') {
-        hewanInfo = `Ada (${jenisHewanInput})`;
+    // Format Tanggal (Contoh: 2 Oktober)
+    let tanggalFormatted = tanggalInput;
+    if (tanggalInput) {
+        const dateObj = new Date(tanggalInput);
+        const options = { day: 'numeric', month: 'long' };
+        tanggalFormatted = dateObj.toLocaleDateString('id-ID', options);
     }
 
-    // Ambil deskripsi pengerjaan
-    const deskripsiPengerjaan = document.getElementById('deskripsiPengerjaan').value.trim();
-    const deskripsiText = deskripsiPengerjaan !== '' ? deskripsiPengerjaan : '-';
+    // Ambil Info Hewan Peliharaan untuk Catatan
+    const hewanRadio = document.querySelector('input[name="hewan"]:checked').value;
+    const jenisHewanInput = document.getElementById('jenisHewan').value.trim();
+    let catatanHewan = '';
+    if (hewanRadio === 'Ada') {
+        catatanHewan = jenisHewanInput ? `• ada peliharaan ${jenisHewanInput}` : '• ada hewan peliharaan';
+    } else {
+        catatanHewan = '• tidak ada hewan peliharaan';
+    }
 
+    // Ambil Deskripsi Pengerjaan
+    const deskripsiPengerjaan = document.getElementById('deskripsiPengerjaan').value.trim();
+
+    // Olah Daftar Layanan, Durasi, dan Mitra
     const rows = document.querySelectorAll('#servicesContainer > div');
-    let servicesText = '';
+    let paketLayananList = [];
+    let durasiList = [];
+    let totalMitra = 0;
     let subtotal = 0;
     let count = 0;
 
     rows.forEach((row) => {
         const select = row.querySelector('.service-select');
-        const qty = row.querySelector('.service-qty').value || 1;
-        const mitra = row.querySelector('.service-mitra').value || 1;
+        const qty = parseInt(row.querySelector('.service-qty').value) || 1;
+        const mitra = parseInt(row.querySelector('.service-mitra').value) || 1;
 
         const serviceName = select ? select.value : '';
         if (serviceName && PRICE_LIST[serviceName]) {
             count++;
             const basePrice = PRICE_LIST[serviceName];
-            const itemTotal = basePrice * qty * mitra;
+            subtotal += (basePrice * qty * mitra);
 
-            subtotal += itemTotal;
-            
-            servicesText += `${count}. *${serviceName}*\n   - Durasi/Qty: ${qty}\n   - Jumlah Mitra: ${mitra} Orang\n   - Subtotal: Rp ${itemTotal.toLocaleString('id-ID')}\n`;
+            paketLayananList.push(serviceName);
+            durasiList.push(`${qty} jam`);
+            totalMitra += mitra;
         }
     });
 
@@ -449,28 +462,28 @@ function sendToWhatsApp() {
         return;
     }
 
-    const total = subtotal + transportFee;
+    // Gabungkan Teks Layanan & Durasi
+    const paketLayananText = paketLayananList.join(', ');
+    const durasiText = [...new Set(durasiList)].join(', ');
 
-    const message = `Halo *B_cleanbandung*, saya ingin memesan layanan cleaning:
+    // Buat Pesan WhatsApp Sesuai Format
+    const message = `📋 *RINCIAN PEMESANAN*
 
-*Data Pelanggan:*
-• Nama: ${nama}
-• Alamat: ${alamat}
-• Area Ongkir: ${areaText}
-• Jadwal: ${tanggal} (Jam ${jam} WIB)
-• Hewan Peliharaan: ${hewanInfo}
+👤 *Nama Customer* : ${nama}
+📍 *Alamat / Share Location* : ${alamat}
+🕒 *Tanggal & Jam* : ${tanggalFormatted} & Jam ${jam} WIB
+🧹 *Paket Layanan* : ${paketLayananText}
+     *Durasi* : ${durasiText}
+👷 *Helper (P/L)* : ${genderHelper.toLowerCase()} ${totalMitra} orang
+⭐ *Helper Favorit (jika ada)* : ${helperFavorit || '-'}
+📝 *Deskripsi Pengerjaan* : ${deskripsiPengerjaan || '-'}
 
-*Layanan yang Dipilih:*
-${servicesText}
-*Catatan / Deskripsi Pengerjaan:*
-${deskripsiText}
+📌 *Catatan* : ${catatanHewan}
 
-*Rincian Biaya:*
-• Subtotal Layanan: Rp ${subtotal.toLocaleString('id-ID')}
-• Transport/Ongkir: Rp ${transportFee.toLocaleString('id-ID')}
-• *Estimasi Total: Rp ${total.toLocaleString('id-ID')}*
+💳 *DP (Booking Fee)* : Rp50.000 Mohon melakukan pembayaran DP sebesar Rp50.000 untuk mengamankan jadwal pemesanan.
+(QRIS ADA DI KATALOG)
 
-Mohon informasi ketersediaan jadwalnya. Terima kasih!`;
+Terima kasih telah mempercayakan layanan kepada kami 🙏🩵`;
 
     const waUrl = `https://wa.me/628977990105?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');

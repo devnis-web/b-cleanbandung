@@ -322,6 +322,27 @@
                                 </div>
                             </div>
 
+                            <!-- PILIHAN HELPER (P/L) & HELPER FAVORIT (BARU) -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="genderHelper" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                        <i class="fa-solid fa-user-group text-emerald-400 mr-1"></i> Preferensi Helper (P/L)
+                                    </label>
+                                    <select id="genderHelper" class="w-full bg-white text-slate-900 px-3 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
+                                        <option value="Perempuan">Perempuan</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Bebas / Bebas Saja">Bebas (Perempuan / Laki-laki)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="helperFavorit" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                        ⭐ Helper Favorit <span class="text-slate-400 font-normal lowercase">(opsional)</span>
+                                    </label>
+                                    <input type="text" id="helperFavorit" placeholder="Contoh: Mbak Ani" 
+                                        class="w-full bg-white text-slate-900 placeholder-slate-400 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
+                                </div>
+                            </div>
+
                             <!-- Dynamic Container Layanan -->
                             <div class="space-y-4 pt-2">
                                 <div class="flex items-center justify-between">
